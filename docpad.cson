@@ -1,0 +1,81 @@
+# The DocPad Configuration File
+# It is simply a CoffeeScript Object which is parsed by CSON
+{
+
+	# Specify the theme we are using
+	theme: "h5bp"
+
+
+	# Customise variables that will be accessible to our templates
+	templateData:
+
+		# Specify some site properties
+		site:
+			# The production url of our website
+			url: "http://balupton.com"
+
+			# The default title of our website
+			title: "Benjamin Lupton"
+
+			# The website author's name
+			author: "Benjamin Lupton"
+
+			# The website author's email
+			email: "b@lupton.cc"
+
+			# The website description (for SEO)
+			description: """
+				Website of Benjamin Lupton. Founder of Bevry, DocPad and HistoryJS. Aficionado of HTML5, CoffeeScript and NodeJS. Available for consulting, training and talks. ENTP.
+				"""
+
+			# The website keywords (for SEO) separated by commas
+			keywords: """
+				balupton, benjamin lupton, lupton, coffeescript, node.js, javascript, history.js, html5, docpad, nowpad, jquery, css3, ruby, git, nosql, cson, html5 history api, ajax, html, web development, web design, nlp, git, neuro-linguistic programming, programming, hacking, hackathon, aloha editor, contenteditable, hallo, jekyll, entp, inventor, web 2.0
+				"""
+
+			# The website analytics codes for various servers
+			analytics:
+				# ReInvigorate is a real-time analytics service
+				reinvigorate: "52uel-236r9p108l"
+
+				# Google Analytics is the most popular analytics service
+				google: "UA-4446117-1"
+
+
+	# Plugin Configuration
+	plugins:
+
+		# Configure the Feedr Plugin
+		feedr:
+
+			# Tell Feedr to fetch the following feeds
+			feeds:
+				# Balupton's GitHub Projects
+				"balupton-projects": "url": "https://api.github.com/users/balupton/repos"
+
+				# Bevry's GitHub Projects
+				"bevry-projects": "url": "https://api.github.com/users/bevry/repos"
+
+				# Balupton's Github Feed
+				"github": "url": "https://github.com/balupton.atom"
+
+				# Balupton's Twitter Feed
+				"twitter": "url": "https://api.twitter.com/1/statuses/user_timeline.json?screen_name=balupton&count=20&include_entities=true&include_rts=true"
+
+				# Balupton's Vimeo Feed
+				"vimeo": "url": "http://vimeo.com/api/v2/balupton/videos.json"
+
+				# Balupton's Flickr Feed
+				"flickr": "url": "http://api.flickr.com/services/feeds/photos_public.gne?id=35776898@N00&lang=en-us&format=json"
+
+	###
+	# Events
+	events:
+		parseAfter: (opts,next) ->
+			@docpad.database.findAll(url: $startsWith: '/blog').forEach (document) ->
+				document.set(layout: 'blogpost')
+				document.addTag('blogpost')
+			next()
+	###
+
+}
