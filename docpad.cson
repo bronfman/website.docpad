@@ -3,7 +3,7 @@
 {
 
 	# Specify the theme we are using
-	theme: "h5bp"
+	theme: "html5-boilerplate"
 
 
 	# Customise variables that will be accessible to our templates

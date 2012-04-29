@@ -28,9 +28,9 @@ This skeleton is currently for an upcoming version of DocPad that is not stable,
 
 ## License
 
-The Website Skeleton for DocPad is made "public domain" using the Creative Commons Zero, as such before you publish your website you should place your desired license here and within the `LICENSE.md` file.
+The Website Skeleton for DocPad is made ["public domain"](http://en.wikipedia.org/wiki/Public_domain) using the [Creative Commons Zero](http://creativecommons.org/publicdomain/zero/1.0/), as such before you publish your website you should place your desired license here and within the `LICENSE.md` file.
 
-If you are wanting to open-source your website, we suggest using the Creative Commons Attribution License for content and the MIT License for code. In which case you'd probably want to use the following as your license:
+If you are wanting to open-source your website, we suggest using the [Creative Commons Attribution License](http://creativecommons.org/licenses/by/3.0/) for content and the [MIT License](http://creativecommons.org/licenses/MIT/), © [Your Name](http://your.website) for code. In which case you'd probably want to use the following as your license:
 
 	This website was created with [Bevry](http://bevry.me")'s [DocPad](http://docpad.io)
 
