@@ -1,6 +1,3 @@
 # Coded in CoffeeScript: http://coffee-script.org
 
-# Include our theme's javascripts using the eco templating engine
-<%- @include("themes/#{@theme}/script.js") %>
-
 # Your CoffeeScript code goes here

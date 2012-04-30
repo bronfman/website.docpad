@@ -6,7 +6,7 @@
 	templateData:
 
 		# Specify the theme we are using
-		theme: "html5-boilerplate"
+		theme: "metro"
 
 		# Specify some site properties
 		site:
@@ -21,6 +21,24 @@
 
 			# The website author's email
 			email: "b@lupton.cc"
+
+			# The website heading to be displayed on the page
+			heading: 'Benjamin Lupton'
+
+			# The website subheading to be displayed on the page
+			subheading: """
+				Founder of <t>links.bevry</t>&apos;s, <t>links.historyjs</t> &amp; <t>links.docpad</t>.<br/>
+				<t>links.opensource</t> leader, <t>links.html5</t>, <t>links.javascript</t> and <t>links.nodejs</t> expert.<br/>
+				Available for consulting, training and speaking. ENTP. <t>links.contact</t>.
+				"""
+
+			# Footer
+			footnote: """
+				This website was created with <t>links.bevry</t>’s <t>links.docpad</t>
+				"""
+			copyright: """
+				Unless stated otherwise, all content is licensed under the <t>links.cclicense</t> and code licensed under the <t>links.mitlicense</t>, &copy; <t>links.author</t>
+				"""
 
 			# The website description (for SEO)
 			description: """
@@ -40,6 +58,65 @@
 				# Google Analytics is the most popular analytics service
 				google: "UA-4446117-1"
 
+			# Specify some feed available for our website
+			feeds: [
+					# Balupton's Blog Stream
+					href: 'http://feeds.feedburner.com/balupton.atom'
+					name: 'Blog Posts'
+				,
+					# Balupton's GitHub Stream
+					href: 'https://github.com/balupton.atom'
+					name: 'GitHub Activity'
+				,
+					# Balupton's Vimeo Stream
+					href: 'http://vimeo.com/api/v2/balupton/videos.atom'
+					name: 'Vimeo Videos'
+				,
+					# Balupton's Flickr Stream
+					href: 'http://api.flickr.com/services/feeds/photos_public.gne?id=35776898@N00&lang=en-us&format=atom'
+					name: 'Flickr Photos'
+				,
+					# Balupton's Twitter Stream
+					href: 'https://api.twitter.com/1/statuses/user_timeline.atom?screen_name=balupton&count=20&include_entities=true&include_rts=true'
+					name: 'Tweets'
+			]
+
+			# Specify some social integration for our website
+			social:
+				# Balupton's Facebook Profile
+				facebook:
+					url: 'https://www.facebook.com/balupton'
+
+				# Balupton's GitHub Profile
+				github:
+					url: 'https://github.com/balupton'
+
+				# Balupton's Twitter Profile
+				twitter:
+					url: 'https://twitter.com/balupton'
+
+				# Balupton's Vimeo Profile
+				vimeo:
+					url: 'https://vimeo.com/balupton'
+
+				# Balupton's Flickr Profile
+				flickr:
+					url: 'http://www.flickr.com/people/balupton/'
+
+		# Common links used throughout the website
+		links:
+			docpad: '<a href="https://github.com/bevry/docpad" title="Visit on GitHub">DocPad</a>'
+			historyjs: '<a href="https://github.com/balupton/history.js" title="Visit on GitHub">History.js</a>'
+			bevry: '<a href="http://bevry.me" title="Visit Website">Bevry</a>'
+			opensource: '<a href="http://en.wikipedia.org/wiki/Open-source_software" title="Visit on Wikipedia">Open-Source</a>'
+			html5: '<a href="http://en.wikipedia.org/wiki/HTML5" title="Visit on Wikipedia">HTML5</a>'
+			javascript: '<a href="http://en.wikipedia.org/wiki/JavaScript" title="Visit on Wikipedia">JavaScript</a>'
+			nodejs: '<a href="http://nodejs.org/" title="Visit Website">Node.js</a>'
+			author: '<a href="http://balupton.com" title="Visit Website">Benjamin Lupton</a>'
+			cclicense: '<a href="http://creativecommons.org/licenses/by/3.0/" title="Visit Website">Creative Commons Attribution License</a>'
+			mitlicense: '<a href="http://creativecommons.org/licenses/MIT/" title="Visit Website">MIT License</a>'
+			contact: '<a href="mailto:b@bevry.me" title="Email me">Email</a>'
+
 
 	# Plugin Configuration
 	plugins:
@@ -50,27 +127,36 @@
 			# Tell Feedr to fetch the following feeds
 			feeds:
 				# Balupton's GitHub Projects
-				"balupton-projects": "url": "https://api.github.com/users/balupton/repos"
+				githubProjectsBalupton:
+					url: "https://api.github.com/users/balupton/repos"
 
 				# Bevry's GitHub Projects
-				"bevry-projects": "url": "https://api.github.com/users/bevry/repos"
+				githubProjectsBevry:
+					url: "https://api.github.com/users/bevry/repos"
 
-				# Balupton's Github Feed
-				"github": "url": "https://github.com/balupton.atom"
+				# Balupton's Github Stream
+				github:
+					url: "https://github.com/balupton.atom"
 
-				# Balupton's Twitter Feed
-				"twitter": "url": "https://api.twitter.com/1/statuses/user_timeline.json?screen_name=balupton&count=20&include_entities=true&include_rts=true"
+				# Balupton's Twitter Stream
+				twitter:
+					url: "https://api.twitter.com/1/statuses/user_timeline.json?screen_name=balupton&count=20&include_entities=true&include_rts=true"
 
-				# Balupton's Vimeo Feed
-				"vimeo": "url": "http://vimeo.com/api/v2/balupton/videos.json"
+				# Balupton's Vimeo Stream
+				vimeo:
+					url: "http://vimeo.com/api/v2/balupton/videos.json"
 
-				# Balupton's Flickr Feed
-				"flickr": "url": "http://api.flickr.com/services/feeds/photos_public.gne?id=35776898@N00&lang=en-us&format=json"
+				# Balupton's Flickr Stream
+				flickr:
+					url: "http://api.flickr.com/services/feeds/photos_public.gne?id=35776898@N00&lang=en-us&format=json"
 
 	# Collections
 	collections:
+		pages: (database,next) ->
+			database.findAll(pageOrder: $exists: true).sortBy(pageOrder:1)
 		posts: (database,next) ->
 			database.findAll(tags: $has: 'post').sortBy(date:-1)
+
 	###
 	# Events
 	events:
