@@ -10,7 +10,7 @@
 		<email><%= @site.email %></email>
 	</author>
 
-	<% @database.findAll(tags: $has: 'blogpost').sortArray(date:-1).forEach (document) -> %>
+	<% @collections.posts.forEachToJSON (document) -> %>
 		<entry>
 			<title><%= document.title or document.name or @title.title %></title>
 			<link href="<%= @site.url %><%= document.url %>"/>

@@ -2,12 +2,11 @@
 # It is simply a CoffeeScript Object which is parsed by CSON
 {
 
-	# Specify the theme we are using
-	theme: "html5-boilerplate"
-
-
 	# Customise variables that will be accessible to our templates
 	templateData:
+
+		# Specify the theme we are using
+		theme: "html5-boilerplate"
 
 		# Specify some site properties
 		site:
@@ -68,6 +67,10 @@
 				# Balupton's Flickr Feed
 				"flickr": "url": "http://api.flickr.com/services/feeds/photos_public.gne?id=35776898@N00&lang=en-us&format=json"
 
+	# Collections
+	collections:
+		posts: (database,next) ->
+			database.findAll(tags: $has: 'post').sortBy(date:-1)
 	###
 	# Events
 	events:

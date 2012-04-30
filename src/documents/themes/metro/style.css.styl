@@ -9,8 +9,31 @@
 // nib: http://visionmedia.github.com/nib/
 @import 'nib'
 
-// Responsive Layouts
-@import 'responsive.css'
+
+// ====================================
+// Responsive Layout Awesomeness
+// https://gist.github.com/1549029
+// Published under the "public domain" using the Creative Commons Zero - http://creativecommons.org/publicdomain/zero/1.0/
+
+// Everything
+*
+	// Make paddings be included within the width
+	box-sizing border-box
+
+// Provide our wrapper mixin
+// Contains our resize transition
+wrapper($site-width = 70%)
+	$site-margin = ((100% - $site-width) / 2)
+	margin-left: $site-margin
+	margin-right: $site-margin
+	transition: margin 0.3s ease-out
+
+// Provide our column mixin
+column()
+	display: inline
+	float: left
+	overflow: hidden
+
 
 // ====================================
 // Configuration
@@ -37,10 +60,6 @@ weightLightest = 100
 // ====================================
 // Styles
 
-// Everything
-*
-	// Make paddings be included within the width
-	box-sizing: border-box
 .fancybox-wrap, #fancybox-overlay
 	box-sizing: content-box
 

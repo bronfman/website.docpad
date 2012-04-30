@@ -1,11 +1,11 @@
-﻿/*
+/*
  * MBP - Mobile boilerplate helper functions
  */
 (function(document){
 
-window.MBP = window.MBP || {}; 
+window.MBP = window.MBP || {};
 
-// Fix for iPhone viewport scale bug 
+// Fix for iPhone viewport scale bug
 // http://www.blog.highub.com/mobile-2/a-fix-for-iphone-viewport-scale-bug/
 
 MBP.viewportmeta = document.querySelector && document.querySelector('meta[name="viewport"]');
@@ -91,11 +91,11 @@ MBP.hideUrlBarOnLoad = function () {
 MBP.fastButton = function (element, handler) {
   this.element = element;
   this.handler = handler;
-	
+
 	addEvt(element, "touchstart", this, false);
 	addEvt(element, "click", this, false);
 };
- 
+
 MBP.fastButton.prototype.handleEvent = function(event) {
 	event = event || window.event;
   switch (event.type) {
@@ -116,7 +116,7 @@ MBP.fastButton.prototype.onTouchStart = function(event) {
 };
 
 MBP.fastButton.prototype.onTouchMove = function(event) {
-  if(Math.abs(event.touches[0].clientX - this.startX) > 10 || 
+  if(Math.abs(event.touches[0].clientX - this.startX) > 10 ||
     Math.abs(event.touches[0].clientY - this.startY) > 10    ) {
     this.reset();
   }
@@ -153,7 +153,7 @@ MBP.ghostClickHandler = function (event) {
     // on the new page, as if the events are continuing from the previous page.
     // We pick that event up here, but MBP.coords is empty, because it's a new page,
     // so we don't prevent it. Here's we're assuming that click events on touch devices
-    // that occur without a preceding touchStart are to be ignored. 
+    // that occur without a preceding touchStart are to be ignored.
     event.stopPropagation();
     event.preventDefault();
     return;
@@ -175,7 +175,7 @@ if (document.addEventListener) {
 addEvt( document.documentElement, 'touchstart', function() {
   MBP.hadTouchEvent = true;
 }, false);
-                            
+
 MBP.coords = [];
 
 // fn arg can be an object or a function, thanks to handleEvent
@@ -259,7 +259,7 @@ MBP.autogrow = function (element, lh) {
   }
 
   var setLineHeight = (lh) ? lh : 12,
-      textLineHeight = element.currentStyle ? element.currentStyle.lineHeight : 
+      textLineHeight = element.currentStyle ? element.currentStyle.lineHeight :
                        getComputedStyle(element, null).lineHeight;
 
   textLineHeight = (textLineHeight.indexOf("px") == -1) ? setLineHeight :
