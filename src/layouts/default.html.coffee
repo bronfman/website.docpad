@@ -11,13 +11,13 @@ html lang: 'en', ->
 		meta 'http-equiv': 'X-UA-Compatible', content: 'IE=edge,chrome=1'
 		meta 'http-equiv': 'content-type', content: 'text/html; charset=utf-8'
 		meta name: 'viewport', content: 'width=device-width, initial-scale=1'
-		text @meta.toHTML()
+		text @blocks.meta.toHTML()
 
 		# Feed
 		@site.feeds.forEach (feed) ->
 			link
-				href: feed.href
-				title: feed.title
+				href: h feed.href
+				title: h feed.title
 				type: (feed.type or 'application/atom+xml')
 				rel: 'alternate'
 
@@ -30,11 +30,11 @@ html lang: 'en', ->
 		meta name: 'keywords', content: site.keywords.concat(@document.keywords or []).join(', ')
 
 		# Include our Styles
-		text @scripts.add([
+		text @blocks.styles.add([
 			'vendor/fancybox/jquery.fancybox.css'
 			"themes/#{@theme}/style.css"
 			"style.css"
-		).toHTML()
+		]).toHTML()
 	body ->
 		# Heading
 		header '.heading', ->
@@ -47,10 +47,12 @@ html lang: 'en', ->
 		# Pages
 		nav '.pages', ->
 			ul ->
-				@collections.pages.toJSON().forEach (page) ->
-					cssname = if @document.url.indexOf(page.url) is 0 then 'active' else 'inactive'
-					li 'class':cssname, ->
-						a href:page.url, title:page.linkTitle ->
+				@collections.pages.toJSON().forEach (page) =>
+					linkClass = if @document.url.indexOf(page.url) is 0 then 'active' else 'inactive'
+					linkTitle = h page.linkTitle
+					linkUrl = h page.url
+					li 'class':linkClass, ->
+						a href:linkUrl, title:linkTitle, ->
 							page.name
 
 		# Document
@@ -65,6 +67,7 @@ html lang: 'en', ->
 			p '.footnote', -> @site.footnote
 			p '.copyright', -> @site.copyright
 
+		###
 		# Sidebar
 		aside '.sidebar', ->
 			# Render all the social sections
@@ -73,9 +76,10 @@ html lang: 'en', ->
 					config: social
 					feed: @feedr.feeds[socialKey] or null
 				}
+		###
 
 		# Include our scripts
-		text @scripts.add([
+		text @blocks.scripts.add([
 			'vendor/log.js'
 			'vendor/jquery.js'
 			'vendor/modernizr.js'
@@ -84,7 +88,7 @@ html lang: 'en', ->
 			'vendor/fancybox/jquery.fancybox.js'
 			"themes/#{@theme}/script.js"
 			"script.js"
-		).toHTML()
+		]).toHTML()
 
 		# Analytics
 		analytics = @site.analytics or {}

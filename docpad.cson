@@ -152,10 +152,10 @@
 
 	# Collections
 	collections:
-		pages: (database,next) ->
-			database.findAll(pageOrder: $exists: true).sortBy(pageOrder:1)
-		posts: (database,next) ->
-			database.findAll(tags: $has: 'post').sortBy(date:-1)
+		pages: (database) ->
+			database.findAll(pageOrder: $exists: true)
+		posts: (database) ->
+			database.findAll(tags: $has: 'post')
 
 	###
 	# Events

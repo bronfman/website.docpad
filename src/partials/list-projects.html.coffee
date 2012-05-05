@@ -1,5 +1,8 @@
 # Project List
 nav '.list-projects', 'typeof':'dc:collection', ->
+	unless @documents.length
+		p '.list-projects-none', -> 'nothing found'
+		return
 	@projects.forEach (document) ->
 		li '.list-projects-project', 'typeof':'soic:post', about:project.url, ->
 			# Display a header link
