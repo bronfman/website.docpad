@@ -3,9 +3,11 @@
 A DocPad Skeleton useful for Creating Websites. Includes themes for HTML5 Boiler Plate, Initializr, and Twitter Bootstrap.
 
 
-## NOTE
+## BLEEDING EDGE
 
-This skeleton is currently for an upcoming version of DocPad that is not stable, or publicly accessible. Please hold tight as we wrap things up. Cheers. [You can follow us on Twitter to stay up to date.](https://twitter.com/docpad)
+This skeleton is made for the just released DocPad v5.2. There are a few things still being worked on such as proper styling for themes, but it is still a fantastic showcase of what to look forward to around the corner :-)
+
+[If you would like to stay up to date with its progress, you can follow us on Twitter.](https://twitter.com/docpad)
 
 
 ## Getting Started
