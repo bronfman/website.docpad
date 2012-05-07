@@ -1,40 +1,86 @@
-# Site & Document Data
-site = @site
-documentTitle = if @document.title then "#{@document.title} | #{@site.title}" else @site.title
+# -----------------------------
+# Prepare
 
-# HTML
+# Get our formatted site title as defined by out docpad.cson file
+siteTitle = @getSiteTitle()
+
+# Merge our site keywords with our documents keywords and stringify
+siteKeywords = @site.keywords.concat(@document.keywords or []).join(', ')
+
+
+# -----------------------------
+# Document
+
 doctype 5
 html lang: 'en', ->
+
+	# -----------------------------
+	# Document Header
+
 	head ->
-		# Standard
-		meta charset: 'utf-8'
-		meta 'http-equiv': 'X-UA-Compatible', content: 'IE=edge,chrome=1'
-		meta 'http-equiv': 'content-type', content: 'text/html; charset=utf-8'
-		meta name: 'viewport', content: 'width=device-width, initial-scale=1'
+		# -----------------------------
+		# Meta Information
+
+		# Set our charset to UFT8 (oldshool method)
+		meta charset:'utf-16'
+
+		# Set our charset to UFT8 (newschool method)
+		meta 'http-equiv':'content-type', content:'text/html; charset=utf-8'
+
+		# Always use the latest rendering engine
+		meta 'http-equiv':'X-UA-Compatible', content:'IE=edge,chrome=1'
+
+		# Set our defualt viewport (window size and scaling) for mobile devices
+		meta name:'viewport', content:'width=device-width, initial-scale=1'
+
+		# SEO: Set our page title that will show up in search engine results
+		meta name:'title', content:h(siteTitle)
+
+		# SEO: Set the name of the author who wrote this page
+		meta name:'author', content:h(@document.author or @site.author)
+
+		# SEO: Set the email of the author who wrote this page
+		meta name:'email', content:h(@document.email or @site.email)
+
+		# SEO: Set the description of this page
+		meta name:'description', content:h(@document.description or @site.description)
+
+		# SEO: Set the keywords of this page
+		meta name:'keywords', content:h(siteKeywords)
+
+		# Output meta data set by DocPad and it's plugins
 		text @blocks.meta.toHTML()
+
+		# Page title as shown in the browser tab and window
+		title @getSiteTitle()
+
+
+		# -----------------------------
+		# (RSS/ATOM) Feeds
 
 		# Feed
 		@site.feeds.forEach (feed) ->
 			link
-				href: h feed.href
-				title: h feed.title
-				type: (feed.type or 'application/atom+xml')
+				href: h(feed.href)
+				title: h(feed.title)
+				type: h(feed.type or 'application/atom+xml')
 				rel: 'alternate'
 
-		# SEO
-		title documentTitle
-		meta name: 'title', content: documentTitle
-		meta name: 'author', content: (@document.author or site.author)
-		meta name: 'email', content: (@document.email or site.email)
-		meta name: 'description', content: (@document.description or site.description)
-		meta name: 'keywords', content: site.keywords.concat(@document.keywords or []).join(', ')
 
-		# Include our Styles
+		# -----------------------------
+		# Stylesheets
+
 		text @blocks.styles.add([
-			'vendor/fancybox/jquery.fancybox.css'
-			"themes/#{@theme}/style.css"
-			"style.css"
+			'/vendor/fancybox/jquery.fancybox.css'
+			"/themes/#{@theme}/style.css"
+			"/style.css"
 		]).toHTML()
+
+
+
+	# -----------------------------
+	# Document Body
+
 	body ->
 		# Heading
 		header '.heading', ->
@@ -49,8 +95,8 @@ html lang: 'en', ->
 			ul ->
 				@collections.pages.toJSON().forEach (page) =>
 					linkClass = if @document.url.indexOf(page.url) is 0 then 'active' else 'inactive'
-					linkTitle = h page.linkTitle
-					linkUrl = h page.url
+					linkTitle = h(page.linkTitle or '')
+					linkUrl = h(page.url)
 					li 'class':linkClass, ->
 						a href:linkUrl, title:linkTitle, ->
 							page.name
@@ -58,8 +104,8 @@ html lang: 'en', ->
 		# Document
 		article '.page',
 			'typeof': 'sioc:page'
-			about: @document.url
-			datetime: @document.date.toISODateString()
+			about: h @document.url
+			datetime: h @document.date.toISODateString()
 			-> @content
 
 		# Footing
@@ -80,14 +126,14 @@ html lang: 'en', ->
 
 		# Include our scripts
 		text @blocks.scripts.add([
-			'vendor/log.js'
-			'vendor/jquery.js'
-			'vendor/modernizr.js'
-			'vendor/underscore.js'
-			'vendor/backbone.js'
-			'vendor/fancybox/jquery.fancybox.js'
-			"themes/#{@theme}/script.js"
-			"script.js"
+			'/vendor/log.js'
+			'/vendor/jquery.js'
+			'/vendor/modernizr.js'
+			'/vendor/underscore.js'
+			'/vendor/backbone.js'
+			'/vendor/fancybox/jquery.fancybox.js'
+			"/themes/#{@theme}/script.js"
+			"/script.js"
 		]).toHTML()
 
 		# Analytics

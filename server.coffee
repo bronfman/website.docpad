@@ -22,6 +22,8 @@ docpadConfig =
 	port: docpadPort
 	maxAge: 86400000  # one day
 	server: docpadServer
+	#templateData:
+	#	require: require  # make node.js's require function available to our templates
 
 
 # =====================================

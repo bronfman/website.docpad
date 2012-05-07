@@ -1,8 +1,8 @@
 ---
 name: 'Blog'
 linkTitle: 'View articles'
-layout: 'page'
 pageOrder: 2
+layout: 'page'
 ---
 
 # Post Listing

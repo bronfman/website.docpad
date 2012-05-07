@@ -40,7 +40,8 @@
 		"docpad-plugin-less": "1.0.x",
 		"docpad-plugin-markdown": "1.0.x",
 		"docpad-plugin-partials": "1.0.x",
-		"docpad-plugin-stylus": "1.0.x"
+		"docpad-plugin-stylus": "1.0.x",
+		"docpad-plugin-text": "1.0.x"
 	},
 	"engines" : {
 		"node": ">=0.4.0",
