@@ -49,7 +49,7 @@ html lang: 'en', ->
 		meta name:'keywords', content:h(siteKeywords)
 
 		# Output meta data set by DocPad and it's plugins
-		text @blocks.meta.toHTML()
+		text @getBlock('meta').toHTML()
 
 		# Page title as shown in the browser tab and window
 		title @getSiteTitle()
@@ -62,7 +62,7 @@ html lang: 'en', ->
 		@site.feeds.forEach (feed) ->
 			link
 				href: h(feed.href)
-				title: h(feed.title)
+				title: h(feed.name or feed.title or '')
 				type: h(feed.type or 'application/atom+xml')
 				rel: 'alternate'
 
@@ -70,7 +70,7 @@ html lang: 'en', ->
 		# -----------------------------
 		# Stylesheets
 
-		text @blocks.styles.add([
+		text @getBlock('styles').add([
 			'/vendor/fancybox/jquery.fancybox.css'
 			"/themes/#{@theme}/style.css"
 			"/style.css"
@@ -93,7 +93,7 @@ html lang: 'en', ->
 		# Pages
 		nav '.pages', ->
 			ul ->
-				@collections.pages.toJSON().forEach (page) =>
+				@getCollection('pages').toJSON().forEach (page) =>
 					linkClass = if @document.url.indexOf(page.url) is 0 then 'active' else 'inactive'
 					linkTitle = h(page.linkTitle or '')
 					linkUrl = h(page.url)
@@ -105,7 +105,7 @@ html lang: 'en', ->
 		article '.page',
 			'typeof': 'sioc:page'
 			about: h @document.url
-			datetime: h @document.date.toISODateString()
+			datetime: h @document.date.toISOString()
 			-> @content
 
 		# Footing
@@ -125,7 +125,7 @@ html lang: 'en', ->
 		###
 
 		# Include our scripts
-		text @blocks.scripts.add([
+		text @getBlock('scripts').add([
 			'/vendor/log.js'
 			'/vendor/jquery.js'
 			'/vendor/modernizr.js'

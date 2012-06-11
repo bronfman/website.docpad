@@ -7,5 +7,5 @@ layout: 'page'
 
 # Post Listing
 text @partial 'list-documents.html.coffee', {
-	documents: @collections.posts.toJSON()
+	documents: @getCollection('posts').toJSON()
 }
