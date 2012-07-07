@@ -20,17 +20,17 @@ This skeleton is made for the just released DocPad v5.2. There are a few things 
 	git clone git://github.com/bevry/website.docpad.git
 	cd website.docpad
 	npm install
-	coffee server.coffee
+	docpad run
 	```
 
-1. [Open http://localhost:10113/](http://localhost:10113/)
+1. [Open http://localhost:9778/](http://localhost:9778/)
 
 1. Start hacking away by modifying the `src` directory
 
 
 ## License
 
-The Website Skeleton for DocPad is made ["public domain"](http://en.wikipedia.org/wiki/Public_domain) using the [Creative Commons Zero](http://creativecommons.org/publicdomain/zero/1.0/), as such before you publish your website you should place your desired license here and within the `LICENSE.md` file.
+This skeleton is made ["public domain"](http://en.wikipedia.org/wiki/Public_domain) using the [Creative Commons Zero](http://creativecommons.org/publicdomain/zero/1.0/), as such before you publish your website you should place your desired license here and within the `LICENSE.md` file.
 
 If you are wanting to open-source your website, we suggest using the [Creative Commons Attribution License](http://creativecommons.org/licenses/by/3.0/) for content and the [MIT License](http://creativecommons.org/licenses/MIT/) for code. In which case you'd probably want to use the following as your license:
 
