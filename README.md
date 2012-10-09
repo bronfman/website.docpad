@@ -17,7 +17,7 @@ This skeleton is made for the just released DocPad v5.2. There are a few things 
 1. Clone the project and run the server
 
 	``` bash
-	git clone git://github.com/bevry/website.docpad.git
+	git clone git://github.com/docpad/website.docpad.git
 	cd website.docpad
 	npm install
 	docpad run
